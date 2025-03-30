@@ -6,7 +6,16 @@ namespace FCamara.CommissionCalculator
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            
+            // Add CORS service
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("ReactAppPolicy",
+                    policy => policy
+                        .WithOrigins("http://localhost:3000") // react origin
+                        .AllowAnyHeader()
+                        .AllowAnyMethod());
+            });
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -21,15 +30,16 @@ namespace FCamara.CommissionCalculator
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-
+            }  
+            app.UseRouting();
+            
+            app.UseCors("ReactAppPolicy");
+                       
             app.UseAuthorization();
 
 
             app.MapControllers();
-
+            
             app.Run();
         }
     }
