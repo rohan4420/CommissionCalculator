@@ -22,15 +22,14 @@ namespace FCamara.CommissionCalculator.Controllers
 [ProducesResponseType(typeof(CommissionCalculationResponse), 200)]
 public IActionResult Calculate([FromBody] CommissionCalculationRequest request)
 {
-if (!ModelState.IsValid)
+    if (!ModelState.IsValid)
     {
-        // Collect all error messages from ModelState
+        // Return BadRequest with error messages
         var errorMessages = ModelState.Values
             .SelectMany(v => v.Errors)
             .Select(e => e.ErrorMessage)
             .ToList();
             
-        // Return error messages
         return BadRequest(new { message = errorMessages });
     }
 

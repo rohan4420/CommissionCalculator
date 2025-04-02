@@ -52,6 +52,82 @@ namespace FCamara.CommissionCalculator.Tests.Services
         }
 
         [Fact]
+        public void CalculateCommission_NullRequest_ThrowsArgumentNullException()
+        {
+            // Arrange
+            CommissionCalculationRequest request = null;
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentNullException>(() => _service.CalculateCommission(request));
+            Assert.Equal("request", exception.ParamName);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        public void CalculateCommission_InvalidAverageSaleAmount_ThrowsArgumentException(decimal averageSaleAmount)
+        {
+            // Arrange
+            var request = new CommissionCalculationRequest
+            {
+                AverageSaleAmount = averageSaleAmount,
+                LocalSalesCount = 10,
+                ForeignSalesCount = 5
+            };
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => _service.CalculateCommission(request));
+            Assert.Contains("Average sale amount must be greater than zero", exception.Message);
+        }
+
+        [Fact]
+        public void CalculateCommission_NegativeLocalSalesCount_ThrowsArgumentException()
+        {
+            // Arrange
+            var request = new CommissionCalculationRequest
+            {
+                AverageSaleAmount = 1000m,
+                LocalSalesCount = -1,
+                ForeignSalesCount = 5
+            };
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => _service.CalculateCommission(request));
+            Assert.Contains("Local sales count be cannot be negative", exception.Message);
+        }
+
+        [Fact]
+        public void CalculateCommission_NegativeForeignSalesCount_ThrowsArgumentException()
+        {
+            // Arrange
+            var request = new CommissionCalculationRequest
+            {
+                AverageSaleAmount = 1000m,
+                LocalSalesCount = 5,
+                ForeignSalesCount = -1
+            };
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => _service.CalculateCommission(request));
+            Assert.Contains("Foreign sales count must be non-negative", exception.Message);
+        }
+
+        [Fact]
+        public void CalculateCommission_ZeroTotalSalesCount_ThrowsArgumentException()
+        {
+            // Arrange
+            var request = new CommissionCalculationRequest
+            {
+                AverageSaleAmount = 1000m,
+                LocalSalesCount = 0,
+                ForeignSalesCount = 0
+            };
+
+            // Act & Assert
+            var exception = Assert.Throws<ArgumentException>(() => _service.CalculateCommission(request));
+            Assert.Contains("At least one sale is required", exception.Message);
+        }
+
+        [Fact]
         public void CalculateCommission_OnlyLocalSales_CalculatesCorrectly()
         {
             // Arrange
