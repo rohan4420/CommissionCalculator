@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCamara.CommissionCalculator", "FCamara.CommissionCalculator.csproj", "{E494BE1F-D402-4C9C-B0D4-5F99249377CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FCamara.CommissionCalculator.Tests", "..\FCamara.CommissionCalculator.Tests\FCamara.CommissionCalculator.Tests.csproj", "{97F04879-22E7-4924-9CAB-03111291ACE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E494BE1F-D402-4C9C-B0D4-5F99249377CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E494BE1F-D402-4C9C-B0D4-5F99249377CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E494BE1F-D402-4C9C-B0D4-5F99249377CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F04879-22E7-4924-9CAB-03111291ACE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F04879-22E7-4924-9CAB-03111291ACE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F04879-22E7-4924-9CAB-03111291ACE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F04879-22E7-4924-9CAB-03111291ACE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
